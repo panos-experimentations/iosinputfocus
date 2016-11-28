@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>setFocus example</title>
+</head>
+<body>
+<ul>
+    <li><a href="index.html">index</a></li>
+    <li><a href="setSelectionRange.html">setSelectionRange</a></li>
+    <li><a href="setFocus.html">setFocus</a></li>
+    <!--<li><a href="vueExample.html">vue example</a></li>-->
+</ul>
+
+<div style="height: 300px; background-color: #efefef">Lorem ipsum</div>
+<div style="height: 300px; background-color: #efefef">Lorem ipsum</div>
+<h3 style="color: #AA074B">setFocus example</h3>
+<div class="text">100kg</div>
+<input type="number" value="100" style="display: none;">
+<button id="edit">Edit</button>
+<button id="cancel">Cancel</button>
+<div style="height: 300px; background-color: #efefef">Lorem ipsum</div>
+<div style="height: 300px; background-color: #efefef">Lorem ipsum</div>
+<script>
+    var $ = document.querySelector.bind(document)
+    $("#edit").addEventListener("click", function() {
+        $("div.text").style.display = "none"
+        var input = $("input")
+        input.style.display = "block"
+        input.focus()
+//        input.type = "text"
+//        input.setSelectionRange(0, input.value.length)
+        input.type = "number"
+    })
+    $("#cancel").addEventListener("click", function() {
+        $("div.text").style.display = "block"
+        var input = $("input")
+        input.style.display = "none"
+    })
+</script>
+</body>
+</html>
