@@ -10,36 +10,42 @@
 <ul>
     <li><a href="index.html">index</a></li>
     <li><a href="setSelectionRange.html">setSelectionRange</a></li>
-    <li><a href="setFocus.html">setFocus</a></li>
-    <!--<li><a href="vueExample.html">vue example</a></li>-->
+    <li><a href="setFocus.html">just setFocus</a></li>
+    <li><a href="vueExample.html">vue example</a></li>
 </ul>
 
 <h2 style="color: #AA074B">setSelectionRange example</h2>
-<div style="height: 350px; background-color: #efefef">Lorem ipsum</div>
+<div style="height: 350px; background-color: #efefef"><p>Lorem ipsum...</p><p>Lorem ipsum...</p><p>Lorem ipsum...</p></div>
 <h2 style="color: #AA074B">setSelectionRange example</h2>
-<div style="height: 350px; background-color: #efefef">Lorem ipsum</div>
+<div style="height: 350px; background-color: #efefef"><p>Lorem ipsum...</p><p>Lorem ipsum...</p><p>Lorem ipsum...</p></div>
 <h2 style="color: #AA074B">setSelectionRange example</h2>
+
 <div class="text">100kg</div>
 <input type="number" value="100" style="display: none;">
 <button id="edit">Edit</button>
 <button id="cancel">Cancel</button>
-<div style="height: 350px; background-color: #efefef">Lorem ipsum</div>
-<div style="height: 350px; background-color: #efefef">Lorem ipsum</div>
+
+<h2 style="color: #AA074B">setSelectionRange example</h2>
+<div style="height: 350px; background-color: #efefef"><p>Lorem ipsum...</p><p>Lorem ipsum...</p><p>Lorem ipsum...</p></div>
+<h2 style="color: #AA074B">setSelectionRange example</h2>
+<div style="height: 350px; background-color: #efefef"><p>Lorem ipsum...</p><p>Lorem ipsum...</p><p>Lorem ipsum...</p></div>
+<h2 style="color: #AA074B">setSelectionRange example</h2>
+
 <script>
-    var $ = document.querySelector.bind(document)
+    var $ = document.querySelector.bind(document);
     $("#edit").addEventListener("click", function() {
-        $("div.text").style.display = "none"
-        var input = $("input")
-        input.style.display = "block"
-        input.focus()
-        input.type = "text"
-        input.setSelectionRange(0, input.value.length)
-        input.type = "number"
-    })
+        $("div.text").style.display = "none";
+        var input = $("input");
+        input.style.display = "block";
+        input.focus();
+        input.type = "text";
+        input.setSelectionRange(0, input.value.length);
+        input.type = "number";
+    });
     $("#cancel").addEventListener("click", function() {
-        $("div.text").style.display = "block"
-        var input = $("input")
-        input.style.display = "none"
+        $("div.text").style.display = "block";
+        var input = $("input");
+        input.style.display = "none";
     })
 </script>
 </body>
