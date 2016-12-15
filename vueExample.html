@@ -76,23 +76,23 @@
                 this.show = false;
 
                 var el = this.$els.paxWeight;
-        		el.value = this.weight;
-        		el.disabled = false; // needs to be set here - binding is too late
+        	el.value = this.weight;
+        	el.disabled = false; // needs to be set here - binding is too late
                 el.focus();
-        		el.setSelectionRange(0,99);
+        	el.setSelectionRange(0,99);
             },
             saveEdit: function() {
-        		var el = this.$els.paxWeight;
-        		if(!isNaN(el.value)) {
-        			this.weight = parseInt(el.value);
-    	        }
-        		this.leaveEditMode();
+		var el = this.$els.paxWeight;
+		if(!isNaN(el.value)) {
+			this.weight = parseInt(el.value);
+		}
+		this.leaveEditMode();
             },
     	    leaveEditMode: function(){
-        		this.show = true;
-        		var el = this.$els.paxWeight;
-        		el.value = this.weight + 'kg';
-        		el.disabled = true;
+		this.show = true;
+		var el = this.$els.paxWeight;
+		el.value = this.weight + 'kg';
+		el.disabled = true;
     	    }
         }
 
