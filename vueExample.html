@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>vue example</title>
     <style type="text/css">
-        .hide-left {
-            margin-left: -1000px;
-        }
+	input[type=text] {
+		width: 5em;
+	}
+	input[type=text]:disabled {
+		-webkit-text-fill-color: rgba(0,0,0,1);
+		-webkit-opacity: 1;
+		background: #fff;
+		border: none;
+	}
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.js"></script>
 </head>
@@ -26,23 +32,23 @@
 <div style="height: 350px; background-color: #efefef"><p>Lorem ipsum...</p><p>Lorem ipsum...</p><p>Lorem ipsum...</p></div>
 <h2 style="color: #AA074B">vue example</h2>
 
-<div v-bind:style="{display: displayText}">
-    {{ DisplayWeight }} <button class="btn btn-xs btn-default ml-20" @click="toggleEdit">Edit</button>
-</div>
-
-<!--<div v-bind:class="{'hide-left': show}" style="display: inline">-->
-<div v-bind:style="{display: displayInput}">
-    <input v-model="weight"
+<div>
+    <input value="{{weight + 'kg'}}"
+           type="text"
+           inputmode="numeric"
            v-el:pax-weight
            v-on:keyup.enter="saveEdit"
-           v-on:keyup.esc="cancelEdit"
-           style="width: 5em"
-           type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*"
+           v-on:keyup.esc="leaveEditMode"
+           min="0" step="1" pattern="[0-9]*"
            title="Non-negative integral number"
+	   disabled="true"
     >
+    <div v-if="show" style="display: inline">
+	   <button class="btn btn-xs btn-default ml-20" @click="enterEditMode">Edit</button>
+    </div>
 </div>
-<div v-bind:style="{display: displayInput}">
-    <button class="btn btn-xs btn-default" @click="saveEdit">Save</button> <button class="btn btn-xs btn-default" @click="cancelEdit">Cancel</button>
+<div v-if="!show">
+    <button class="btn btn-xs btn-default" @click="saveEdit">Save</button> <button class="btn btn-xs btn-default" @click="leaveEditMode">Cancel</button>
 </div>
 
 
@@ -63,40 +69,31 @@
         data: vueData,
 
         computed: {
-            DisplayWeight: function () {
-                return this.weight + ' kg';
-            },
-            displayText: function() {
-                return this.show ? 'inline' : 'none';
-            },
-            displayInput: function() {
-                return this.show ? 'none' : 'inline';
-            }
-
         },
 
         methods: {
-            toggleEdit: function () {
+            enterEditMode: function () {
                 this.show = false;
 
-                this.$nextTick(function () {
-
-                    var el = this.$els.paxWeight;
-                    el.focus();
-                    el.type = 'text';
-                    setTimeout(function (el) {
-                        el.setSelectionRange(0, 6);
-                        el.type = 'number';
-                    }, 300, el);
-                });
-
+                var el = this.$els.paxWeight;
+        	el.value = this.weight;
+        	el.disabled = false; // needs to be set here - binding is too late
+                el.focus();
+        	el.setSelectionRange(0,99);
             },
             saveEdit: function() {
-                this.show = true;
+		var el = this.$els.paxWeight;
+		if(!isNaN(el.value)) {
+			this.weight = parseInt(el.value);
+		}
+		this.leaveEditMode();
             },
-            cancelEdit: function() {
-                this.show = true;
-            }
+    	    leaveEditMode: function(){
+		this.show = true;
+		var el = this.$els.paxWeight;
+		el.value = this.weight + 'kg';
+		el.disabled = true;
+    	    }
         }
 
 
